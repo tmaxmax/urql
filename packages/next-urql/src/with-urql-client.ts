@@ -19,6 +19,7 @@ import {
   NextComponentType,
   SSRExchange,
   NextUrqlPageContext,
+  NextAppType,
 } from './types';
 
 let ssr: SSRExchange;
@@ -29,7 +30,7 @@ export function withUrqlClient(
 ) {
   if (!options) options = {};
 
-  return <C extends NextComponentType = NextComponentType>(
+  return <C extends (NextComponentType | NextAppType) = (NextComponentType | NextAppType)>(
     AppOrPage: C
   ): NextComponentType => {
     const shouldEnableSuspense = Boolean(

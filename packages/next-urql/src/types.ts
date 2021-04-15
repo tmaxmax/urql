@@ -20,6 +20,30 @@ export type NextComponentType<
   getInitialProps?(context: C): IP | Promise<IP>;
 };
 
+export type AppInitialProps = {
+  pageProps: any
+}
+
+export type AppPropsType<
+  R = any,
+  P = {}
+> = AppInitialProps & {
+  Component: NextComponentType<PartialNextContext, any, P>
+  router: R
+  __N_SSG?: boolean
+  __N_SSP?: boolean
+}
+
+export type NextAppType<
+  C extends PartialNextContext = PartialNextContext,
+  IP = {},
+  P = {},
+  R = any,
+> = ComponentType<AppPropsType<R, P> & WithUrqlProps> & {
+  getInitialProps?(context: C): IP | Promise<IP>;
+};
+
+
 export interface NextUrqlContext extends PartialNextContext {
   urqlClient: Client;
   Component: NextComponentType<PartialNextContext>;
