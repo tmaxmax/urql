@@ -8,7 +8,7 @@ export function resetClient() {
 
 export function initUrqlClient(
   clientOptions: ClientOptions,
-  canEnableSuspense: boolean
+  canEnableSuspense?: boolean
 ): Client | null {
   // Create a new Client for every server-side rendered request.
   // This ensures we reset the state for each rendered page.
