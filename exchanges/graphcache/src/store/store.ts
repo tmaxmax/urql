@@ -209,4 +209,22 @@ export class Store implements Cache {
   ): void {
     writeFragment(this, formatDocument(fragment), data, variables as any);
   }
+
+  link(
+    entity: Data | string,
+    field: string,
+    entities: Data | Data[],
+    fieldArgs?: Variables
+  ): void {
+    const entityKey = this.keyOfEntity(entity);
+    if (!entityKey) return;
+
+    InMemoryData.writeLink(
+      entityKey,
+      keyOfField(field, fieldArgs),
+      Array.isArray(entities)
+        ? entities.map(entity => this.keyOfEntity(entity)).filter(Boolean)
+        : this.keyOfEntity(entities)
+    );
+  }
 }

@@ -128,6 +128,13 @@ export interface Cache {
     data: T,
     variables?: V
   ): void;
+
+  link(
+    entity: Data | string,
+    field: string,
+    entities: Data | Data[],
+    fieldArgs?: Variables
+  ): void;
 }
 
 type ResolverResult =
