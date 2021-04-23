@@ -132,8 +132,14 @@ export interface Cache {
   link(
     entity: Data | string,
     field: string,
+    fieldArgs: Variables | null,
     entities: Data | Data[],
-    fieldArgs?: Variables
+  ): void;
+
+  link(
+    entity: Data | string,
+    field: string,
+    entities: Data | Data[],
   ): void;
 }
 

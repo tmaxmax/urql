@@ -213,18 +213,20 @@ export class Store implements Cache {
   link(
     entity: Data | string,
     field: string,
-    entities: Data | Data[],
-    fieldArgs?: Variables
+    fieldArgs: Variables | null | Data | Data[],
+    entities?: Data | Data[],
   ): void {
+    const writeableEntities: Data | Data[] = entities ? entities : fieldArgs as Data | Data[];
+    const fieldArguments: Variables | null = entities ? fieldArgs as Variables | null : null;
     const entityKey = this.keyOfEntity(entity);
     if (!entityKey) return;
 
     InMemoryData.writeLink(
       entityKey,
-      keyOfField(field, fieldArgs),
-      Array.isArray(entities)
-        ? entities.map(entity => this.keyOfEntity(entity)).filter(Boolean)
-        : this.keyOfEntity(entities)
+      keyOfField(field, fieldArguments),
+      Array.isArray(writeableEntities)
+        ? writeableEntities.map(entity => this.keyOfEntity(entity))
+        : this.keyOfEntity(writeableEntities as Data)
     );
   }
 }
