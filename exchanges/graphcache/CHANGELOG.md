@@ -1,5 +1,14 @@
 # @urql/exchange-graphcache
 
+## 4.0.1
+
+### Patch Changes
+
+- ⚠️ Fix list items being returned as `null` even for non-nullable lists, when the entities are missing in the cache. This could happen when a resolver was added returning entities or their keys. This behaviour is now (correctly) only applied to partial results with schema awareness, by [@JoviDeCroock](https://github.com/JoviDeCroock) (See [#1566](https://github.com/FormidableLabs/urql/pull/1566))
+- Allow for the schema subscription and mutationType to be null, by [@JoviDeCroock](https://github.com/JoviDeCroock) (See [#1530](https://github.com/FormidableLabs/urql/pull/1530))
+- Updated dependencies (See [#1509](https://github.com/FormidableLabs/urql/pull/1509))
+  - @urql/core@2.0.1
+
 ## 4.0.0
 
 ### Major Changes
